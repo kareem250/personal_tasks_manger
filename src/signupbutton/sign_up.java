@@ -6,8 +6,6 @@ package signupbutton;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -16,18 +14,18 @@ import javax.swing.JLabel;
  *
  * @author wika
  */
-public class NewJFrame extends javax.swing.JFrame {
+public class sign_up extends javax.swing.JFrame {
 
     /**
-     * Creates new form NewJFrame
+     * Creates new form sign_up
      */
-    public NewJFrame() {
+    public sign_up() {
         initComponents();
         int frameWidth = jPanel1.getWidth();
         int frameHeight = jPanel1.getHeight();
         MyTextField feild = new MyTextField();
         feild.setHint("input user name");
-        JLabel labal = new JLabel("Sign In");
+        JLabel labal = new JLabel("Sign Up");
         labal.setFont(new Font("Arial", Font.PLAIN, 24));
         labal.setForeground(new Color(7, 164, 121));
         labal.setBounds((int) (frameWidth / 2.1), (int) (frameHeight * 0.03), (int) (frameWidth * 0.3), 45);
@@ -57,7 +55,7 @@ public class NewJFrame extends javax.swing.JFrame {
         feild2.setPrefixIcon(new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/pass.png")));
         jPanel1.add(feild2);
         int xbutton = (int) ((frameWidth - (int) (frameWidth * 0.25)) / 1.3);
-        JButton button = new JButton("Sign In");
+        JButton button = new JButton("Sign Up");
         button.setFont(new Font("Arial", Font.PLAIN, 20));
         button.setBackground(new Color(7, 164, 121));
         button.setForeground(new Color(250, 250, 250));
@@ -79,22 +77,15 @@ public class NewJFrame extends javax.swing.JFrame {
         button2.setContentAreaFilled(true);
         button2.setFocusPainted(false);
         button2.setBounds(xbutton2, y2 + 80, (int) (frameWidth * 0.25), 40);
-        JLabel WelcomeLabel = new JLabel("welcome back");
+        JLabel WelcomeLabel = new JLabel("Glad to see you");
         WelcomeLabel.setFont(new Font("Arial", Font.BOLD, 28) {
         });
-        button2.addActionListener(new ActionListener(){
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new sign_up().setVisible(true);
-                dispose();
-            }
-        });
-       WelcomeLabel.setBounds(xbutton2  + 12,(int)(frameHeight * 0.2),(int)(frameWidth * 0.25),40);
+       WelcomeLabel.setBounds(xbutton2 ,(int)(frameHeight * 0.2),(int)(frameWidth * 0.28),40);
        WelcomeLabel.setForeground(Color.white);
        WelcomeLabel.setOpaque(true);
        WelcomeLabel.setBackground(new Color(7, 164, 121));
         labal2.add(WelcomeLabel);
-        JLabel massegeLabel = new JLabel("if you dont have acount");
+        JLabel massegeLabel = new JLabel("if you already have acount");
         massegeLabel.setFont(new Font("Arial", Font.BOLD, 16) {
         });
        massegeLabel.setBounds(xbutton2  + 12,(int)(frameHeight * 0.3),(int)(frameWidth * 0.25),40);
@@ -131,11 +122,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 820, Short.MAX_VALUE)
+            .addGap(0, 821, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 449, Short.MAX_VALUE)
+            .addGap(0, 452, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -173,21 +164,20 @@ public class NewJFrame extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(sign_up.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(sign_up.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(sign_up.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(sign_up.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-
-                new NewJFrame().setVisible(true);
+                new sign_up().setVisible(true);
             }
         });
     }
