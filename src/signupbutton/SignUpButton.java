@@ -54,6 +54,7 @@ UIManager.put("Button.background", Color.BLUE);   // لون الزرار
         frame.setContentPane(panal);
         
                 frame.setVisible(false);
+                new home_page().setVisible(true);
                 new NewJFrame().setVisible(true);
     }
 

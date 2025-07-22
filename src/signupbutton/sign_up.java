@@ -69,7 +69,7 @@ public class sign_up extends javax.swing.JFrame {
         int xbutton2 = (int) ((frameWidth / 3) - (int) (frameWidth * 0.25)) / 2;
         System.out.println(xbutton2);
         
-        JButton button2 = new JButton("Sign Up");
+        JButton button2 = new JButton("Sign In");
         button2.setFont(new Font("Arial", Font.PLAIN, 20));
         button2.setForeground(Color.WHITE);
         button2.setBackground(new Color(7, 164, 121));
@@ -80,7 +80,7 @@ public class sign_up extends javax.swing.JFrame {
         JLabel WelcomeLabel = new JLabel("Glad to see you");
         WelcomeLabel.setFont(new Font("Arial", Font.BOLD, 28) {
         });
-       WelcomeLabel.setBounds(xbutton2 ,(int)(frameHeight * 0.2),(int)(frameWidth * 0.28),40);
+       WelcomeLabel.setBounds(xbutton2 -6,(int)(frameHeight * 0.2),(int)(frameWidth * 0.28),40);
        WelcomeLabel.setForeground(Color.white);
        WelcomeLabel.setOpaque(true);
        WelcomeLabel.setBackground(new Color(7, 164, 121));
