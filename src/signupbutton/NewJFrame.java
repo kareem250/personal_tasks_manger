@@ -4,6 +4,12 @@
  */
 package signupbutton;
 
+import java.awt.Color;
+import java.awt.Font;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+
 /**
  *
  * @author wika
@@ -15,6 +21,92 @@ public class NewJFrame extends javax.swing.JFrame {
      */
     public NewJFrame() {
         initComponents();
+        int frameWidth = jPanel1.getWidth();
+        int frameHeight = jPanel1.getHeight();
+
+        System.out.println("Height: " + frameHeight);
+        System.out.println("Width: " + frameWidth);
+
+        MyTextField feild = new MyTextField();
+        feild.setHint("input user name");
+        JLabel labal = new JLabel("Sign In");
+        labal.setFont(new Font("Arial", Font.PLAIN, 24));
+        labal.setForeground(new Color(7, 164, 121));
+        labal.setBounds((int) (frameWidth / 2.1), (int) (frameHeight * 0.03), (int) (frameWidth * 0.3), 45);
+        jPanel1.add(labal);
+        JLabel labal2 = new JLabel();
+        labal2.setBackground(new Color(7, 164, 121));
+        labal2.setBounds(0, 0, (int) (frameWidth / 3), frameHeight);
+        labal2.setOpaque(true);
+
+// X = (panel width - field width) / 2   --> نص العرض عشان يتوسط أفقي
+        int x = (int) ((frameWidth - (frameWidth * 0.4)) / 1.25);
+// Y = (panel height - field height) / 2 --> نص الارتفاع عشان يتوسط رأسي
+        int y = (int) (frameHeight * 0.25);
+        System.out.println();
+        feild.setBounds(x, y, (int) (frameWidth * 0.4), 35);
+        feild.setPrefixIcon(new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/user.png")));
+        jPanel1.add(feild);
+
+        PassFeildCom feild2 = new PassFeildCom();
+        feild2.setHint("input password");
+
+// X زي الأول (متوسط أفقي)
+        int x2 = x;
+        int y2 = y + 60;
+
+        feild2.setBounds(x2, y2, (int) (frameWidth * 0.4), 35);
+        feild2.setPrefixIcon(new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/pass.png")));
+        jPanel1.add(feild2);
+        int xbutton = (int) ((frameWidth - (int) (frameWidth * 0.25)) / 1.3);
+        JButton button = new JButton("Sign In");
+        button.setFont(new Font("Arial", Font.PLAIN, 20));
+        button.setBackground(new Color(7, 164, 121));
+        button.setForeground(new Color(250, 250, 250));
+        button.setOpaque(true);
+        button.setContentAreaFilled(true);
+        button.setBounds(xbutton, (y2 + 80), (int) (frameWidth * 0.25), 40);
+
+        button.setFocusPainted(false);
+        button.setBackground(new Color(7, 164, 121));
+        jPanel1.add(button);
+        int xbutton2 = (int) ((frameWidth / 3) - (int) (frameWidth * 0.25)) / 2;
+        System.out.println(xbutton2);
+        
+        JButton button2 = new JButton("Sign Up");
+        button2.setFont(new Font("Arial", Font.PLAIN, 20));
+        button2.setForeground(Color.WHITE);
+        button2.setBackground(new Color(7, 164, 121));
+        button2.setOpaque(true);
+        button2.setContentAreaFilled(true);
+        button2.setFocusPainted(false);
+        button2.setBounds(xbutton2, y2 + 80, (int) (frameWidth * 0.25), 40);
+        JLabel WelcomeLabel = new JLabel("welcome back");
+        WelcomeLabel.setFont(new Font("Arial", Font.BOLD, 28) {
+        });
+       WelcomeLabel.setBounds(xbutton2  + 12,(int)(frameHeight * 0.2),(int)(frameWidth * 0.25),40);
+       WelcomeLabel.setForeground(Color.white);
+       WelcomeLabel.setOpaque(true);
+       WelcomeLabel.setBackground(new Color(7, 164, 121));
+        labal2.add(WelcomeLabel);
+        JLabel massegeLabel = new JLabel("if you dont have acount");
+        massegeLabel.setFont(new Font("Arial", Font.BOLD, 16) {
+        });
+       massegeLabel.setBounds(xbutton2  + 12,(int)(frameHeight * 0.3),(int)(frameWidth * 0.25),40);
+       massegeLabel.setForeground(Color.white);
+       massegeLabel.setOpaque(true);
+       massegeLabel.setBackground(new Color(7, 164, 121));
+        labal2.add(massegeLabel);
+               JLabel massegeLabel2 = new JLabel("click here");
+        massegeLabel2.setFont(new Font("Arial", Font.BOLD, 16) {
+        });
+       massegeLabel2.setBounds(xbutton2  + 12,(int)(frameHeight * 0.3) + 30,(int)(frameWidth * 0.25),40);
+       massegeLabel2.setForeground(Color.white);
+       massegeLabel2.setOpaque(true);
+       massegeLabel2.setBackground(new Color(7, 164, 121));
+               labal2.add(massegeLabel2);
+        labal2.add(button2);
+        jPanel1.add(labal2);
     }
 
     /**
@@ -26,17 +118,34 @@ public class NewJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel1 = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 820, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 449, Short.MAX_VALUE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -72,11 +181,13 @@ public class NewJFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 new NewJFrame().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
 }
