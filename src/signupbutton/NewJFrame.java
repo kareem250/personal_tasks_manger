@@ -5,12 +5,19 @@
 package signupbutton;
 
 import java.awt.Color;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -56,6 +63,16 @@ public class NewJFrame extends javax.swing.JFrame {
         feild2.setBounds(x2, y2, (int) (frameWidth * 0.4), 35);
         feild2.setPrefixIcon(new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/pass.png")));
         jPanel1.add(feild2);
+        JCheckBox check = new JCheckBox();
+        check.addActionListener(e -> {
+        if(check.isSelected()){
+                feild2.setEchoChar((char) 0);
+                }else{
+                    feild2.setEchoChar('*');
+                }
+        });
+        check.setBounds((x2 + 20) + (feild2.getWidth()), y2, 300, 30);
+        jPanel1.add(check);
         int xbutton = (int) ((frameWidth - (int) (frameWidth * 0.25)) / 1.3);
         JButton button = new JButton("Sign In");
         button.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -67,6 +84,40 @@ public class NewJFrame extends javax.swing.JFrame {
 
         button.setFocusPainted(false);
         button.setBackground(new Color(7, 164, 121));
+        JButton textButton = new JButton("forget password ?");
+
+textButton.setContentAreaFilled(false);
+textButton.setBorderPainted(false);
+textButton.setFocusPainted(false);
+textButton.setOpaque(false);
+textButton.setForeground(Color.GRAY);
+textButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+textButton.setBounds((x2 + feild2.getWidth()) - 50, y2 + 45, 130, 40);
+
+jPanel1.add(textButton);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                try {
+            String sql = "select * from  users where user_name =? and  password =?";
+            Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","hr","hr");
+            PreparedStatement ps =c.prepareStatement(sql);
+            ps.setString(1,feild.getText() );
+            ps.setString(2,feild2.getText() );
+            int x = ps.executeUpdate();
+            if(x==1){
+                JOptionPane.showMessageDialog( jPanel1 ,"done" );
+ new NewJFrame().setVisible(true);
+ dispose();
+            }else{
+                JOptionPane.showMessageDialog( jPanel1 ,"user_name or password wrong" );
+            }
+        } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(jPanel1, ex.getMessage());
+        }
+            }
+        }
+        );
         jPanel1.add(button);
         int xbutton2 = (int) ((frameWidth / 3) - (int) (frameWidth * 0.25)) / 2;
         System.out.println(xbutton2);

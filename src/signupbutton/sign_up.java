@@ -6,9 +6,18 @@ package signupbutton;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -43,16 +52,37 @@ public class sign_up extends javax.swing.JFrame {
         feild.setBounds(x, y, (int) (frameWidth * 0.4), 35);
         feild.setPrefixIcon(new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/user.png")));
         jPanel1.add(feild);
-
-        PassFeildCom feild2 = new PassFeildCom();
-        feild2.setHint("input password");
+        //
+        MyTextField emailfeild = new MyTextField();
+        emailfeild.setHint("input email");
 
 // X زي الأول (متوسط أفقي)
         int x2 = x;
         int y2 = y + 60;
 
-        feild2.setBounds(x2, y2, (int) (frameWidth * 0.4), 35);
+        emailfeild.setBounds(x2, y2, (int) (frameWidth * 0.4), 35);
+        emailfeild.setPrefixIcon(new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/mail.png")));
+        jPanel1.add(emailfeild);
+        //
+        PassFeildCom feild2 = new PassFeildCom();
+        feild2.setHint("input email");
+
+// X زي الأول (متوسط أفقي)
+        int x3 = x;
+        int y3 = y + 120;
+
+        feild2.setBounds(x3, y3, (int) (frameWidth * 0.4), 35);
         feild2.setPrefixIcon(new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/pass.png")));
+        JCheckBox check = new JCheckBox();
+        check.addActionListener(e -> {
+        if(check.isSelected()){
+                feild2.setEchoChar((char) 0);
+                }else{
+                    feild2.setEchoChar('*');
+                }
+        });
+        check.setBounds((x3 + 20) + (feild2.getWidth()), y3, 300, 30);
+        jPanel1.add(check);
         jPanel1.add(feild2);
         int xbutton = (int) ((frameWidth - (int) (frameWidth * 0.25)) / 1.3);
         JButton button = new JButton("Sign Up");
@@ -61,14 +91,38 @@ public class sign_up extends javax.swing.JFrame {
         button.setForeground(new Color(250, 250, 250));
         button.setOpaque(true);
         button.setContentAreaFilled(true);
-        button.setBounds(xbutton, (y2 + 80), (int) (frameWidth * 0.25), 40);
-
+        button.setBounds(xbutton, (y3 + 80), (int) (frameWidth * 0.25), 40);
+        button.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+                try {
+                    System.out.println("insert");
+            String sql = "insert into users(user_id,user_name,password,email) values(users_sequence.nextval,?,?,?)";
+            Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","hr","hr");
+            PreparedStatement ps =c.prepareStatement(sql);
+            ps.setString(1,feild.getText() );
+            ps.setString(2,feild2.getText() );
+            ps.setString(3,emailfeild.getText() );
+            int x = ps.executeUpdate();
+            if(x==1){
+                JOptionPane.showMessageDialog( jPanel1 ,"done" );
+ new home_page().setVisible(true);
+ dispose();
+            }
+        } catch (SQLException ex) {
+      JOptionPane.showMessageDialog(jPanel1, ex.getMessage());
+      System.out.println(ex.getMessage());
+        }
+            }
+        }
+        );
         button.setFocusPainted(false);
         button.setBackground(new Color(7, 164, 121));
         jPanel1.add(button);
         int xbutton2 = (int) ((frameWidth / 3) - (int) (frameWidth * 0.25)) / 2;
         System.out.println(xbutton2);
-        
+
         JButton button2 = new JButton("Sign In");
         button2.setFont(new Font("Arial", Font.PLAIN, 20));
         button2.setForeground(Color.WHITE);
@@ -80,27 +134,27 @@ public class sign_up extends javax.swing.JFrame {
         JLabel WelcomeLabel = new JLabel("Glad to see you");
         WelcomeLabel.setFont(new Font("Arial", Font.BOLD, 28) {
         });
-       WelcomeLabel.setBounds(xbutton2 -6,(int)(frameHeight * 0.2),(int)(frameWidth * 0.28),40);
-       WelcomeLabel.setForeground(Color.white);
-       WelcomeLabel.setOpaque(true);
-       WelcomeLabel.setBackground(new Color(7, 164, 121));
+        WelcomeLabel.setBounds(xbutton2 - 6, (int) (frameHeight * 0.2), (int) (frameWidth * 0.28), 40);
+        WelcomeLabel.setForeground(Color.white);
+        WelcomeLabel.setOpaque(true);
+        WelcomeLabel.setBackground(new Color(7, 164, 121));
         labal2.add(WelcomeLabel);
         JLabel massegeLabel = new JLabel("if you already have acount");
         massegeLabel.setFont(new Font("Arial", Font.BOLD, 16) {
         });
-       massegeLabel.setBounds(xbutton2  + 12,(int)(frameHeight * 0.3),(int)(frameWidth * 0.25),40);
-       massegeLabel.setForeground(Color.white);
-       massegeLabel.setOpaque(true);
-       massegeLabel.setBackground(new Color(7, 164, 121));
+        massegeLabel.setBounds(xbutton2 + 12, (int) (frameHeight * 0.3), (int) (frameWidth * 0.25), 40);
+        massegeLabel.setForeground(Color.white);
+        massegeLabel.setOpaque(true);
+        massegeLabel.setBackground(new Color(7, 164, 121));
         labal2.add(massegeLabel);
-               JLabel massegeLabel2 = new JLabel("click here");
+        JLabel massegeLabel2 = new JLabel("click here");
         massegeLabel2.setFont(new Font("Arial", Font.BOLD, 16) {
         });
-       massegeLabel2.setBounds(xbutton2  + 12,(int)(frameHeight * 0.3) + 30,(int)(frameWidth * 0.25),40);
-       massegeLabel2.setForeground(Color.white);
-       massegeLabel2.setOpaque(true);
-       massegeLabel2.setBackground(new Color(7, 164, 121));
-               labal2.add(massegeLabel2);
+        massegeLabel2.setBounds(xbutton2 + 12, (int) (frameHeight * 0.3) + 30, (int) (frameWidth * 0.25), 40);
+        massegeLabel2.setForeground(Color.white);
+        massegeLabel2.setOpaque(true);
+        massegeLabel2.setBackground(new Color(7, 164, 121));
+        labal2.add(massegeLabel2);
         labal2.add(button2);
         jPanel1.add(labal2);
     }
