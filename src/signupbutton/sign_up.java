@@ -8,16 +8,25 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.lang.classfile.BufWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.xml.transform.Result;
+import oracle.jdbc.internal.ResultSetCache;
 
 /**
  *
@@ -75,11 +84,11 @@ public class sign_up extends javax.swing.JFrame {
         feild2.setPrefixIcon(new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/pass.png")));
         JCheckBox check = new JCheckBox();
         check.addActionListener(e -> {
-        if(check.isSelected()){
+            if (check.isSelected()) {
                 feild2.setEchoChar((char) 0);
-                }else{
-                    feild2.setEchoChar('*');
-                }
+            } else {
+                feild2.setEchoChar('*');
+            }
         });
         check.setBounds((x3 + 20) + (feild2.getWidth()), y3, 300, 30);
         jPanel1.add(check);
@@ -95,25 +104,35 @@ public class sign_up extends javax.swing.JFrame {
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+
                 try {
                     System.out.println("insert");
-            String sql = "insert into users(user_id,user_name,password,email) values(users_sequence.nextval,?,?,?)";
-            Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","hr","hr");
-            PreparedStatement ps =c.prepareStatement(sql);
-            ps.setString(1,feild.getText() );
-            ps.setString(2,feild2.getText() );
-            ps.setString(3,emailfeild.getText() );
-            int x = ps.executeUpdate();
-            if(x==1){
-                JOptionPane.showMessageDialog( jPanel1 ,"done" );
- new home_page().setVisible(true);
- dispose();
-            }
-        } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(jPanel1, ex.getMessage());
-      System.out.println(ex.getMessage());
-        }
+                    String sql = "insert into users(user_id,user_name,password,email) values(users_sequence.nextval,?,?,?)";
+                    Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "hr", "hr");
+                    PreparedStatement ps = c.prepareStatement(sql);
+                    ps.setString(1, feild.getText());
+                    ps.setString(2, feild2.getText());
+                    ps.setString(3, emailfeild.getText());
+                    int x = ps.executeUpdate();
+                    String sql2 = "SELECT users_sequence.CURRVAL FROM dual;";
+                    PreparedStatement ps2 = c.prepareStatement(sql);
+                      ResultSet res =ps2.executeQuery();
+                    
+                    
+                    if (x == 1) {
+                        JOptionPane.showMessageDialog(jPanel1, "done");
+                        BufferedWriter br = new BufferedWriter(new FileWriter(new File("userid.txt")));
+                        br.write(feild.getText());
+
+                        new home_page().setVisible(true);
+                        dispose();
+                    }
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(jPanel1, ex.getMessage());
+                    System.out.println(ex.getMessage());
+                } catch (IOException ex) {
+                    Logger.getLogger(sign_up.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         );
@@ -130,6 +149,10 @@ public class sign_up extends javax.swing.JFrame {
         button2.setOpaque(true);
         button2.setContentAreaFilled(true);
         button2.setFocusPainted(false);
+        button2.addActionListener((e) -> {
+            new NewJFrame().setVisible(true);
+            dispose();
+        });
         button2.setBounds(xbutton2, y2 + 80, (int) (frameWidth * 0.25), 40);
         JLabel WelcomeLabel = new JLabel("Glad to see you");
         WelcomeLabel.setFont(new Font("Arial", Font.BOLD, 28) {

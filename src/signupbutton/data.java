@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package javaapplication204;
+package signupbutton;
 
 import java.awt.HeadlessException;
 import java.sql.Connection;
@@ -18,12 +18,12 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author future
  */
-public class Jframe_of_tasks extends javax.swing.JFrame {
+public class data  extends javax.swing.JFrame {
 
     /**
      * Creates new form NewJFrame
      */
-    public Jframe_of_tasks() {
+    public data() {
         initComponents();
     }
 
@@ -45,6 +45,7 @@ public class Jframe_of_tasks extends javax.swing.JFrame {
         task_id = new javax.swing.JTextField();
         task_name = new javax.swing.JTextField();
         description = new javax.swing.JTextField();
+        due_date = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
@@ -55,7 +56,8 @@ public class Jframe_of_tasks extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
         search = new javax.swing.JTextField();
-        due_date = new com.toedter.calendar.JDateChooser();
+        user_id = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -89,6 +91,8 @@ public class Jframe_of_tasks extends javax.swing.JFrame {
 
         description.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
 
+        due_date.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jButton1.setText("Insert");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -115,13 +119,13 @@ public class Jframe_of_tasks extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null}
             },
             new String [] {
-                "task_id", "task_name", "description", "due_date", "priority ", "status"
+                "task_id", "task_name", "description", "due_date", "priority ", "status", "user_id"
             }
         ));
         jScrollPane1.setViewportView(jTable1);
@@ -155,6 +159,12 @@ public class Jframe_of_tasks extends javax.swing.JFrame {
                 searchKeyReleased(evt);
             }
         });
+
+        user_id.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("user_id");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -194,19 +204,26 @@ public class Jframe_of_tasks extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(due_date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                        .addComponent(due_date, javax.swing.GroupLayout.PREFERRED_SIZE, 193, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(priority, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(status, 0, 193, Short.MAX_VALUE))))
-                                .addGap(23, 23, 23))
+                                            .addComponent(status, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(26, 26, 26)
+                                        .addComponent(user_id, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addContainerGap())
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(48, 48, 48)
+                                .addGap(45, 45, 45)
                                 .addComponent(jButton4)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
@@ -216,7 +233,7 @@ public class Jframe_of_tasks extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addGap(79, 79, 79)
                                         .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addContainerGap(20, Short.MAX_VALUE))))))
+                                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))))
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 611, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -238,13 +255,15 @@ public class Jframe_of_tasks extends javax.swing.JFrame {
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(description, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 48, Short.MAX_VALUE)
-                            .addComponent(due_date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(due_date, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(priority, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(user_id, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -278,26 +297,43 @@ public class Jframe_of_tasks extends javax.swing.JFrame {
     }//GEN-LAST:event_priorityActionPerformed
 /*
     create table tasks (
-   TASK_ID     NOT NULL NUMBER(38)   
-TASK_NAME            VARCHAR2(45) 
-DESCRIPTION          CLOB         
-DUE_DATE             VARCHAR2(45) 
-PRIORITY             VARCHAR2(45) 
-STATUS               VARCHAR2(55) 
+   TASK_ID      NUMBER(38) primary key ,  
+TASK_NAME            VARCHAR2(45) ,
+DESCRIPTION          CLOB         ,
+DUE_DATE             VARCHAR2(45) ,
+PRIORITY             VARCHAR2(45) ,
+STATUS               VARCHAR2(55) ,
 
     );
     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-  try {
-  String sql ="insert into tasks values (?,?,?,?,?,?)";
+
+        if(task_id.getText().trim().isEmpty()|| task_name.getText().trim().isEmpty() ||
+          description.getText().trim().isEmpty() ){
+            JOptionPane.showMessageDialog(this, "input all of fields");
+            return;
+        
+        }
+        if(!task_id.getText().matches("\\d+")) { //  اي عدد من الارقام 
+        JOptionPane.showMessageDialog(this, "ID  must be numeric");
+        return;}
+        if(!task_name.getText().matches("[a-zA-Z\\s]+")){
+        
+        JOptionPane.showMessageDialog(this, "the task_name must contain only letters and  spaces");}
+    
+        
+        try {
+  String sql ="insert into taskss values (?,?,?,sysdate,?,?,?)";
   Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:xe","hr","hr");
 PreparedStatement ps =c.prepareStatement(sql);
+
 ps.setString(1, task_id.getText());
 ps.setString(2, task_name.getText());
 ps.setString(3, description.getText());
-ps.setString(4, due_date.getDateFormatString());
-ps.setString(5,(String) priority.getSelectedItem());
-ps.setString(6,(String)status.getSelectedItem() );
+ps.setString(4,(String) priority.getSelectedItem());
+ps.setString(5,(String)status.getSelectedItem() );
+ps.setString(6, user_id.getText());
+
 int x = ps.executeUpdate();
 if(x==1){
 JOptionPane.showMessageDialog(this,"the task is saved in Database");
@@ -319,7 +355,7 @@ JOptionPane.showMessageDialog(this,"Error");
 
     public  void reafreash (){
         try {
-            String sql ="select * from tasks order by task_id asc";
+            String sql ="select * from taskss order by task_id asc";
             Connection c=getconnetion() ;
             PreparedStatement ps =c.prepareStatement(sql);
             DefaultTableModel dt = (DefaultTableModel) jTable1.getModel();
@@ -333,6 +369,7 @@ JOptionPane.showMessageDialog(this,"Error");
   rs.getString("due_date"),
   rs.getString("priority"),
   rs.getString("status"),
+  rs.getString("user_id"),
   };   
   dt.addRow(arr);
             }
@@ -348,19 +385,19 @@ JOptionPane.showMessageDialog(this,"Error");
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         try {
-            String sql = "update tasks set task_name = ? , description = ?, due_date = ? , priority = ? ,  status = ? where task_id = ?";
+            String sql = "update taskss set task_name = ? , description = ?, due_date = ? , priority = ? ,  status = ? where task_id = ?";
             Connection c= getconnetion();
             PreparedStatement ps = c.prepareStatement(sql);
     ps.setString(1, task_name.getText());
     ps.setString(2, description.getText());
-    ps.setString(3, due_date.getDateFormatString());
+    ps.setString(3, due_date.getText());
     ps.setString(4, (String)priority.getSelectedItem());
     ps.setString(5, (String) status.getSelectedItem());
     ps.setString(6, task_id.getText());
     
     int x = ps.executeUpdate();
     if(x==1){
-        JOptionPane.showMessageDialog(this, "the task is updated in susccefully !");
+        JOptionPane.showMessageDialog(this, "the tasks is updated in susccefully !");
   reafreash();
     }else {
     
@@ -376,7 +413,7 @@ JOptionPane.showMessageDialog(this,"Error");
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
                 try {
-            String sql = "delete from tasks where task_id  = ?";
+            String sql = "delete from taskss where task_id  = ?";
             Connection c= getconnetion();
             PreparedStatement ps = c.prepareStatement(sql);
     ps.setString(1, task_id.getText());
@@ -397,7 +434,7 @@ JOptionPane.showMessageDialog(this,"Error");
 
     private void searchKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_searchKeyReleased
         try {
-            String sql = "select * from tasks where task_id = ?";
+            String sql = "select * from taskss where task_id = ?";
             Connection c= getconnetion();
             PreparedStatement ps = c.prepareStatement(sql);
     ps.setString(1, search.getText());
@@ -407,7 +444,7 @@ JOptionPane.showMessageDialog(this,"Error");
     task_id.setText(x.getString("task_id"));
     task_name.setText(x.getString("task_name"));
     description.setText(x.getString("description"));
-    due_date.setDateFormatString(x.getString("due_date"));
+    due_date.setText(x.getString("due_date"));
     priority.setSelectedItem(x.getString("priority"));
     status.setSelectedItem(x.getString("status"));
     
@@ -416,14 +453,14 @@ JOptionPane.showMessageDialog(this,"Error");
 task_id.setText("");
 task_name.setText("");
 description.setText("");
-due_date.setDateFormatString(null);
+due_date.setText("");
 priority.setSelectedItem("");
 status  .setSelectedItem  ("");
 
     }
     
         } catch (SQLException ex) {
-           
+            
                   }
         // TODO add your handling code here:
     }//GEN-LAST:event_searchKeyReleased
@@ -445,7 +482,7 @@ status  .setSelectedItem  ("");
                 }
             }
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(NewJFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(data.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
         
@@ -453,13 +490,13 @@ status  .setSelectedItem  ("");
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Jframe_of_tasks().setVisible(true);
+            new data().setVisible(true);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField description;
-    private com.toedter.calendar.JDateChooser due_date;
+    private javax.swing.JTextField due_date;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
@@ -471,6 +508,7 @@ status  .setSelectedItem  ("");
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JComboBox<String> priority;
@@ -478,5 +516,6 @@ status  .setSelectedItem  ("");
     private javax.swing.JComboBox<String> status;
     private javax.swing.JTextField task_id;
     private javax.swing.JTextField task_name;
+    private javax.swing.JTextField user_id;
     // End of variables declaration//GEN-END:variables
 }

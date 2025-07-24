@@ -20,12 +20,9 @@ import javax.swing.SwingConstants;
  * @author wika
  */
 public class home_page extends javax.swing.JFrame {
-      CardLayout cardLayout;
-    JPanel mainPanel;
-
 Color white = new Color(250,250,250);
 Color green = new Color(7, 164, 121);
-JButton button = new JButton("home",new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/pass.png")));
+JButton button = new JButton("add task",new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/pass.png")));
 JButton button2 = new JButton("home",new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/user.png")));
 JButton button4 = new JButton("home",new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/pass.png")));
 JButton button3 = new JButton("home",new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/user.png")));
@@ -125,31 +122,9 @@ JButton button3 = new JButton("home",new ImageIcon(Thread.currentThread().getCon
          jPanel1.add(button2);
          jPanel1.add(button3);
          jPanel1.add(button4);
-        jPanel1.add(AppBarLabel);
-        setSize(600, 400);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-
-        cardLayout = new CardLayout();
-        mainPanel = new JPanel(cardLayout);
-
-        // ضيف الشاشات
-        mainPanel.add(new UsersPanel(), "users");
-        mainPanel.add(new TasksPanel(), "tasks");
-
-        // زرارين للتنقل
-        JButton usersBtn = new JButton("Users");
-        JButton tasksBtn = new JButton("Tasks");
-
-        usersBtn.addActionListener(e -> cardLayout.show(mainPanel, "users"));
-        tasksBtn.addActionListener(e -> cardLayout.show(mainPanel, "tasks"));
-
-        JPanel topBar = new JPanel();
-        topBar.add(usersBtn);
-        topBar.add(tasksBtn);
-
-        add(topBar, BorderLayout.NORTH);
-        add(mainPanel, BorderLayout.CENTER);
- 
+         TaskFormPanel taskFormPanel = new TaskFormPanel();
+                 taskFormPanel.setBounds((int)(jPanel1.getWidth() * 0.25), 0, (int)(jPanel1.getWidth() * 0.7), jPanel1.getHeight());
+         jPanel1.add(taskFormPanel);
     }
 
     /**

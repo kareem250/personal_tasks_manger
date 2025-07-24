@@ -107,7 +107,7 @@ jPanel1.add(textButton);
             int x = ps.executeUpdate();
             if(x==1){
                 JOptionPane.showMessageDialog( jPanel1 ,"done" );
- new NewJFrame().setVisible(true);
+ new home_page().setVisible(true);
  dispose();
             }else{
                 JOptionPane.showMessageDialog( jPanel1 ,"user_name or password wrong" );
