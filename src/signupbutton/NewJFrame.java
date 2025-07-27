@@ -9,10 +9,17 @@ import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -65,11 +72,11 @@ public class NewJFrame extends javax.swing.JFrame {
         jPanel1.add(feild2);
         JCheckBox check = new JCheckBox();
         check.addActionListener(e -> {
-        if(check.isSelected()){
+            if (check.isSelected()) {
                 feild2.setEchoChar((char) 0);
-                }else{
-                    feild2.setEchoChar('*');
-                }
+            } else {
+                feild2.setEchoChar('*');
+            }
         });
         check.setBounds((x2 + 20) + (feild2.getWidth()), y2, 300, 30);
         jPanel1.add(check);
@@ -86,42 +93,56 @@ public class NewJFrame extends javax.swing.JFrame {
         button.setBackground(new Color(7, 164, 121));
         JButton textButton = new JButton("forget password ?");
 
-textButton.setContentAreaFilled(false);
-textButton.setBorderPainted(false);
-textButton.setFocusPainted(false);
-textButton.setOpaque(false);
-textButton.setForeground(Color.GRAY);
-textButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
-textButton.setBounds((x2 + feild2.getWidth()) - 50, y2 + 45, 130, 40);
+        textButton.setContentAreaFilled(false);
+        textButton.setBorderPainted(false);
+        textButton.setFocusPainted(false);
+        textButton.setOpaque(false);
+        textButton.setForeground(Color.GRAY);
+        textButton.setCursor(new Cursor(Cursor.HAND_CURSOR));
+        textButton.setBounds((x2 + feild2.getWidth()) - 50, y2 + 45, 130, 40);
 
-jPanel1.add(textButton);
+        jPanel1.add(textButton);
         button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 try {
-            String sql = "select * from  users where user_name =? and  password =?";
-            Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE","hr","hr");
-            PreparedStatement ps =c.prepareStatement(sql);
-            ps.setString(1,feild.getText() );
-            ps.setString(2,feild2.getText() );
-            int x = ps.executeUpdate();
-            if(x==1){
-                JOptionPane.showMessageDialog( jPanel1 ,"done" );
- new home_page().setVisible(true);
- dispose();
-            }else{
-                JOptionPane.showMessageDialog( jPanel1 ,"user_name or password wrong" );
-            }
-        } catch (SQLException ex) {
-      JOptionPane.showMessageDialog(jPanel1, ex.getMessage());
-        }
+                    String sql = "select * from  users where user_name =? and  password =?";
+                    Connection c = DriverManager.getConnection("jdbc:oracle:thin:@localhost:1521:XE", "hr", "hr");
+                    PreparedStatement ps = c.prepareStatement(sql);
+                    ps.setString(1, feild.getText());
+                    ps.setString(2, feild2.getText());
+                    int x = ps.executeUpdate();
+                    if (x == 1) {
+                        JOptionPane.showMessageDialog(jPanel1, "done");
+                        String sql2 = "SELECT user_id,email FROM users WHERE user_name = ?";
+                        PreparedStatement ps2 = c.prepareStatement(sql2);
+                        ps2.setString(1, feild.getText());
+
+                        ResultSet id = ps2.executeQuery();
+                        id.next();
+                try{BufferedWriter br = new BufferedWriter(new FileWriter(new File("userid.txt")));
+                        br.write(id.getString("user_id") + " " + feild.getText() + " " + id.getString("email"));
+                        br.close();
+                }catch(Exception ex){
+                JOptionPane.showMessageDialog(jPanel1, ex.getMessage());
+                }
+                        new home_page().setVisible(true);
+                        dispose();
+                    } else {
+                        JOptionPane.showMessageDialog(jPanel1, "user_name or password wrong");
+                    }
+                } catch (SQLException ex) {
+                    JOptionPane.showMessageDialog(jPanel1, ex.getMessage());
+                } catch (IOException ex) {
+                    Logger.getLogger(NewJFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
         );
         jPanel1.add(button);
         int xbutton2 = (int) ((frameWidth / 3) - (int) (frameWidth * 0.25)) / 2;
         System.out.println(xbutton2);
-        
+
         JButton button2 = new JButton("Sign Up");
         button2.setFont(new Font("Arial", Font.PLAIN, 20));
         button2.setForeground(Color.WHITE);
@@ -133,34 +154,34 @@ jPanel1.add(textButton);
         JLabel WelcomeLabel = new JLabel("welcome back");
         WelcomeLabel.setFont(new Font("Arial", Font.BOLD, 28) {
         });
-        button2.addActionListener(new ActionListener(){
+        button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new sign_up().setVisible(true);
                 dispose();
             }
         });
-       WelcomeLabel.setBounds(xbutton2  + 12,(int)(frameHeight * 0.2),(int)(frameWidth * 0.25),40);
-       WelcomeLabel.setForeground(Color.white);
-       WelcomeLabel.setOpaque(true);
-       WelcomeLabel.setBackground(new Color(7, 164, 121));
+        WelcomeLabel.setBounds(xbutton2 + 12, (int) (frameHeight * 0.2), (int) (frameWidth * 0.25), 40);
+        WelcomeLabel.setForeground(Color.white);
+        WelcomeLabel.setOpaque(true);
+        WelcomeLabel.setBackground(new Color(7, 164, 121));
         labal2.add(WelcomeLabel);
         JLabel massegeLabel = new JLabel("if you dont have acount");
         massegeLabel.setFont(new Font("Arial", Font.BOLD, 16) {
         });
-       massegeLabel.setBounds(xbutton2  + 12,(int)(frameHeight * 0.3),(int)(frameWidth * 0.25),40);
-       massegeLabel.setForeground(Color.white);
-       massegeLabel.setOpaque(true);
-       massegeLabel.setBackground(new Color(7, 164, 121));
+        massegeLabel.setBounds(xbutton2 + 12, (int) (frameHeight * 0.3), (int) (frameWidth * 0.25), 40);
+        massegeLabel.setForeground(Color.white);
+        massegeLabel.setOpaque(true);
+        massegeLabel.setBackground(new Color(7, 164, 121));
         labal2.add(massegeLabel);
-               JLabel massegeLabel2 = new JLabel("click here");
+        JLabel massegeLabel2 = new JLabel("click here");
         massegeLabel2.setFont(new Font("Arial", Font.BOLD, 16) {
         });
-       massegeLabel2.setBounds(xbutton2  + 12,(int)(frameHeight * 0.3) + 30,(int)(frameWidth * 0.25),40);
-       massegeLabel2.setForeground(Color.white);
-       massegeLabel2.setOpaque(true);
-       massegeLabel2.setBackground(new Color(7, 164, 121));
-               labal2.add(massegeLabel2);
+        massegeLabel2.setBounds(xbutton2 + 12, (int) (frameHeight * 0.3) + 30, (int) (frameWidth * 0.25), 40);
+        massegeLabel2.setForeground(Color.white);
+        massegeLabel2.setOpaque(true);
+        massegeLabel2.setBackground(new Color(7, 164, 121));
+        labal2.add(massegeLabel2);
         labal2.add(button2);
         jPanel1.add(labal2);
     }

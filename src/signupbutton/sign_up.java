@@ -13,10 +13,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.classfile.BufWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.Action;
@@ -114,16 +111,17 @@ public class sign_up extends javax.swing.JFrame {
                     ps.setString(2, feild2.getText());
                     ps.setString(3, emailfeild.getText());
                     int x = ps.executeUpdate();
-                    String sql2 = "SELECT users_sequence.CURRVAL FROM dual;";
-                    PreparedStatement ps2 = c.prepareStatement(sql);
-                      ResultSet res =ps2.executeQuery();
-                    
-                    
+
                     if (x == 1) {
                         JOptionPane.showMessageDialog(jPanel1, "done");
-                        BufferedWriter br = new BufferedWriter(new FileWriter(new File("userid.txt")));
-                        br.write(feild.getText());
+                        String sql2 = "SELECT user_id, FROM users WHERE username = ?";
+                        PreparedStatement ps2 = c.prepareStatement(sql2);
+                        ps2.setString(1, feild.getText());
 
+                        ResultSet id = ps2.executeQuery();
+                        id.next();
+                        BufferedWriter br = new BufferedWriter(new FileWriter(new File("userid.txt")));
+                        br.write(id.getString("user_id")+ " " + feild.getText() + " " + emailfeild.getText());
                         new home_page().setVisible(true);
                         dispose();
                     }

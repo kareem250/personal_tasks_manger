@@ -9,6 +9,13 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
+import java.nio.Buffer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -19,112 +26,150 @@ import javax.swing.SwingConstants;
  *
  * @author wika
  */
-public class home_page extends javax.swing.JFrame {
-Color white = new Color(250,250,250);
-Color green = new Color(7, 164, 121);
-JButton button = new JButton("add task",new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/pass.png")));
-JButton button2 = new JButton("home",new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/user.png")));
-JButton button4 = new JButton("home",new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/pass.png")));
-JButton button3 = new JButton("home",new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/user.png")));
-@SuppressWarnings("empty-statement")
-    public home_page() {
+public final class home_page extends javax.swing.JFrame {
+
+    Color white = new Color(250, 250, 250);
+    Color green = new Color(7, 164, 121);
+    JButton button = new JButton("add task", new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/pass.png")));
+    JButton button2 = new JButton("home", new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/user.png")));
+    JButton button4 = new JButton("home", new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/pass.png")));
+    JButton button3 = new JButton("home", new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/user.png")));
+
+    public static String[] UserData() throws IOException {
+        BufferedReader br = new BufferedReader(new FileReader(new File("userid.txt")));
+        String[] data = br.readLine().split(" ");
+        return data;
+    }
+
+    @SuppressWarnings("empty-statement")
+    public home_page() throws IOException {
         initComponents();
+        String[] user_data = UserData();
+        String id = user_data[0];
+        String user_name = user_data[1];
+        String email = user_data[1];
         int width = jPanel1.getWidth();
         int hight = jPanel1.getHeight();
         int x = (int) (jPanel1.getWidth() * 0.03);
         int y = (int) (jPanel1.getHeight() * 0.2);
+        jPanel1.setLayout(null);
         JLabel AppBarLabel = new JLabel(
-    "task management",
-    new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/mail.png")),
-    SwingConstants.LEFT  
-);
-        AppBarLabel.setFont(new Font("Arial",Font.PLAIN,14));
+                "task management",
+                new ImageIcon(Thread.currentThread().getContextClassLoader().getResource("icon/mail.png")),
+                SwingConstants.LEFT
+        );
+        AppBarLabel.setFont(new Font("Arial", Font.PLAIN, 14));
         AppBarLabel.setBounds(0, 0, 150, 50);
-        
-        button.setBounds(x, (int)(hight * 0.2), 160, 40);
-        button.setBackground( new Color(7, 164, 121));
+        TaskFormPanel taskFormPanel = new TaskFormPanel(id);
+        taskFormPanel.setBounds((int) (jPanel1.getWidth() * 0.25), 0, (int) (jPanel1.getWidth() * 0.7), jPanel1.getHeight());
+        jPanel1.add(taskFormPanel);
+         TaskFormPanel taskFormPanel2 = new TaskFormPanel(id);
+        taskFormPanel2.setBounds((int) (jPanel1.getWidth() * 0.25), 0, (int) (jPanel1.getWidth() * 0.7), jPanel1.getHeight());
+        jPanel1.add(taskFormPanel2);
+         TaskFormPanel taskFormPanel3 = new TaskFormPanel(id);
+        taskFormPanel3.setBounds((int) (jPanel1.getWidth() * 0.25), 0, (int) (jPanel1.getWidth() * 0.7), jPanel1.getHeight());
+        jPanel1.add(taskFormPanel3);
+         TaskFormPanel taskFormPanel4 = new TaskFormPanel(id);
+        taskFormPanel4.setBounds((int) (jPanel1.getWidth() * 0.25), 0, (int) (jPanel1.getWidth() * 0.7), jPanel1.getHeight());
+        jPanel1.add(taskFormPanel4);
+        button.setBounds(x, (int) (hight * 0.2), 160, 40);
+        button.setBackground(new Color(7, 164, 121));
         button.setOpaque(true);
         button.setContentAreaFilled(true);
         button.setFocusPainted(false);
         button.setHorizontalAlignment(SwingConstants.LEFT);
-         button.addActionListener(new ActionListener() {
+        button.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 button.setBackground(green);
                 button2.setBackground(white);
                 button3.setBackground(white);
                 button4.setBackground(white);
-               jPanel1.repaint();
+                     taskFormPanel.setVisible(true);
+     taskFormPanel2.setVisible(false);
+     taskFormPanel3.setVisible(false);
+     taskFormPanel4.setVisible(false);
+                jPanel1.repaint();
             }
         });
-                
-        button2.setBounds(x, (int)(hight * 0.35), 160, 40);
-        button2.setBackground(new Color(250,250,250));
-              button2.setOpaque(true);
+
+        button2.setBounds(x, (int) (hight * 0.35), 160, 40);
+        button2.setBackground(new Color(250, 250, 250));
+        button2.setOpaque(true);
         button2.setContentAreaFilled(true);
         button2.setFocusPainted(false);
         button2.setHorizontalAlignment(SwingConstants.LEFT);
         button2.addActionListener(new ActionListener() {
-            
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 button.setBackground(white);
                 button2.setBackground(green);
                 button3.setBackground(white);
                 button4.setBackground(white);
-               jPanel1.repaint();
+                taskFormPanel.setVisible(false);
+     taskFormPanel2.setVisible(true);
+     taskFormPanel3.setVisible(false);
+     taskFormPanel4.setVisible(false);
+                jPanel1.repaint();
             }
         });
-                
-        button3.setBounds(x, (int)(hight * 0.50), 160, 40);
-        button3.setBackground(new Color(250,250,250));
-                      button3.setOpaque(true);
+
+        button3.setBounds(x, (int) (hight * 0.50), 160, 40);
+        button3.setBackground(new Color(250, 250, 250));
+        button3.setOpaque(true);
         button3.setContentAreaFilled(true);
         button3.setFocusPainted(false);
         button3.setHorizontalAlignment(SwingConstants.LEFT);
         //
-         button3.addActionListener(new ActionListener() {
-            
+        button3.addActionListener(new ActionListener() {
+
             @Override
             public void actionPerformed(ActionEvent e) {
                 button.setBackground(white);
                 button2.setBackground(white);
                 button3.setBackground(green);
                 button4.setBackground(white);
-               jPanel1.repaint();
+                taskFormPanel.setVisible(false);
+     taskFormPanel3.setVisible(true);
+     taskFormPanel4.setVisible(false);
+                jPanel1.repaint();
             }
         });
-               //
-                              button4.setOpaque(true);
+        //
+        button4.setOpaque(true);
         button4.setContentAreaFilled(true);
         button4.setFocusPainted(false);
-                 button3.addActionListener(new ActionListener() {
+        button3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
-               jPanel1.repaint();
+
+                jPanel1.repaint();
             }
         });
-        button4.setBounds(x, (int)(hight * 0.65), 160, 40);
-        button4.setBackground(new Color(250,250,250));
+        button4.setBounds(x, (int) (hight * 0.65), 160, 40);
+        button4.setBackground(new Color(250, 250, 250));
         button4.setHorizontalAlignment(SwingConstants.LEFT);
-         button4.addActionListener(new ActionListener() {
+        button4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 button.setBackground(white);
                 button2.setBackground(white);
                 button3.setBackground(white);
                 button4.setBackground(green);
-               jPanel1.repaint();
+                taskFormPanel.setVisible(false);
+     taskFormPanel2.setVisible(false);
+     taskFormPanel3.setVisible(false);
+     taskFormPanel4.setVisible(true);
+                jPanel1.repaint();
             }
         });
-         jPanel1.add(button);
-         jPanel1.add(button2);
-         jPanel1.add(button3);
-         jPanel1.add(button4);
-         TaskFormPanel taskFormPanel = new TaskFormPanel();
-                 taskFormPanel.setBounds((int)(jPanel1.getWidth() * 0.25), 0, (int)(jPanel1.getWidth() * 0.7), jPanel1.getHeight());
-         jPanel1.add(taskFormPanel);
+        jPanel1.add(button);
+        jPanel1.add(button2);
+        jPanel1.add(button3);
+        jPanel1.add(button4);
+
+   
     }
 
     /**
@@ -169,12 +214,14 @@ JButton button3 = new JButton("home",new ImageIcon(Thread.currentThread().getCon
      * @param args the command line arguments
      */
     public static void main(String args[]) {
+
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
          * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
          */
         try {
+
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
@@ -195,7 +242,11 @@ JButton button3 = new JButton("home",new ImageIcon(Thread.currentThread().getCon
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new home_page().setVisible(true);
+                try {
+                    new home_page().setVisible(true);
+                } catch (IOException ex) {
+                    Logger.getLogger(home_page.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }
